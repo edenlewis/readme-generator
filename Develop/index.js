@@ -12,8 +12,9 @@ const fs = require("fs")
 
 // Function call to initialize app
 // init();
-const generateReadMe = ({title, description, installationInstructions, usageInformation, contributionGuidelines, testInstructions})=>
+const generateReadMe = ({title, description, installationInstructions, usageInformation, contributionGuidelines, testInstructions, license})=>
 `# ${title}
+${license=== 'none'?'': `![GitHub license](https://img.shields.io/badge/license-${license}-blue.svg)`}
 ${description}
 ## Installation Instructions
 ${installationInstructions}
@@ -56,7 +57,13 @@ inquirer
     {
       type: 'input',
       name: 'testInstructions',
-      message: 'Enter your LinkedIn URL.',
+      message: 'How to test',
+    },
+    {
+      type: 'list',
+      name: 'license',
+      message: 'What kind of license should your project have?',
+      choices: ['MIT', 'APACHE2.0', 'GPL3.0', 'BSD3', 'None'],
     },
   ])
   .then((answers) => {
